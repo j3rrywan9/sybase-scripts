@@ -12,6 +12,10 @@ sp_configure "disable disk mirroring"
 
 select address_info as "host/port",host_name() as "hostname",@@servername as "servername",db_name() as "current_dbname" from master..syslisteners
 
+select address_info from master..syslisteners where net_type='tcp'
+
+select srvnetname from sysservers where srvname='SYS_BACKUP'
+
 use testdb
 go
 sp_spaceused syslogs
@@ -39,9 +43,13 @@ load database sandbox_staging from "/opt/sybase/dumps/sandbox_full.1" at ASE1570
 
 unmount database sandbox_staging to "/home/sybase/staging/manifest"
 
--- Misc
+-- User Account
+select name, suid from syslogins
 
+-- Misc
 use master
 sp_dboption "sandbox", "allow nulls by default", true
 
 select * from sysusages where dbid=db_id("sales_db1")
+
+select * from sysobjects where type='U'
