@@ -16,6 +16,8 @@ select address_info from master..syslisteners where net_type='tcp'
 
 select srvnetname from sysservers where srvname='SYS_BACKUP'
 
+select name from sysdatabases where name not in ('master', 'model', 'sybsystemdb', 'sybsystemprocs', 'tempdb')
+
 use testdb
 go
 sp_spaceused syslogs
@@ -43,7 +45,16 @@ load database sandbox_staging from "/opt/sybase/dumps/sandbox_full.1" at ASE1570
 
 unmount database sandbox_staging to "/home/sybase/staging/manifest"
 
+-- Backup and Recovery
+dump database one_file_mix_log to "/home/sybase/jwang/ofm_1" stripe on "/home/sybase/jwang/ofm_2" stripe on "/home/sybase/jwang/ofm_3"
+
+load database shared_file_2 from "/net/nas/nas/engineering/sybase-ase/shared_file_2_full" with headeronly
+
+load database shared_file_2 from "/net/nas/nas/engineering/sybase-ase/shared_file_2_full" with listonly=full
+
 -- User Account
+select suser_name(), suser_id(), db_name()
+
 select name, suid from syslogins
 
 -- Misc
