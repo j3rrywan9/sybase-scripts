@@ -10,13 +10,17 @@ sp_helpdevice
 
 sp_configure "disable disk mirroring"
 
-select address_info as "host/port",host_name() as "hostname",@@servername as "servername",db_name() as "current_dbname" from master..syslisteners
+select address_info as "host/port", host_name() as "hostname", @@servername as "servername", db_name() as "current_dbname" from master..syslisteners
 
-select address_info from master..syslisteners where net_type='tcp'
+select address_info from master..syslisteners where net_type='tcp' and address_info not like 'localhost%' and address_info not like '127.0.0.1%'
 
 select srvnetname from sysservers where srvname='SYS_BACKUP'
 
 select name from sysdatabases where name not in ('master', 'model', 'sybsystemdb', 'sybsystemprocs', 'tempdb')
+
+select sum(size) from sysusages where dbid=7
+
+select durability from sysdatabases where name='loaddb'
 
 use testdb
 go
@@ -47,6 +51,8 @@ unmount database sandbox_staging to "/home/sybase/staging/manifest"
 
 -- Backup and Recovery
 dump database one_file_mix_log to "/home/sybase/jwang/ofm_1" stripe on "/home/sybase/jwang/ofm_2" stripe on "/home/sybase/jwang/ofm_3"
+
+dump tran loaddb to "/net/nas/nas/engineering/sybase-ase/loaddb_tran_1"
 
 load database shared_file_2 from "/net/nas/nas/engineering/sybase-ase/shared_file_2_full" with headeronly
 
