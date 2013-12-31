@@ -58,6 +58,11 @@ load database shared_file_2 from "/net/nas/nas/engineering/sybase-ase/shared_fil
 
 load database shared_file_2 from "/net/nas/nas/engineering/sybase-ase/shared_file_2_full" with listonly=full
 
+use master
+sp_dboption "loaddb", "allow incremental dumpe", true
+
+dump database loaddb cumulative to "/net/nas/nas/engineering/sybase-ase/loaddb_cumulative_20131231_10AM"
+
 -- User Account
 select suser_name(), suser_id(), db_name()
 
