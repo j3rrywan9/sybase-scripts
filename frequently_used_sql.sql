@@ -75,3 +75,5 @@ sp_dboption "sandbox", "allow nulls by default", true
 select * from sysusages where dbid=db_id("sales_db1")
 
 select * from sysobjects where type='U'
+
+defncopy -Usa -SASE1570_S1 out test.txt master dbo.pop_t1
