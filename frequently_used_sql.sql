@@ -69,6 +69,16 @@ select suser_name(), suser_id(), db_name()
 select name, suid from syslogins
 
 -- Misc
+shutdown
+
+shutdown with nowait
+
+SYB_BACKUP...sp_who
+
+select srvnetname from sysservers where srvname='SYB_BACKUP'
+
+update sysservers set srvnetname='VM_02_S4_BS' where srvname='SYB_BACKUP'
+
 use master
 sp_dboption "sandbox", "allow nulls by default", true
 
