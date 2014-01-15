@@ -63,7 +63,21 @@ sp_dboption "loaddb", "allow incremental dumpe", true
 
 dump database loaddb cumulative to "/net/nas/nas/engineering/sybase-ase/loaddb_cumulative_20131231_10AM"
 
+dump database testdb2 to "/net/nas/nas/engineering/sybase-ase/testdb2_comp_full_20140110_11AM" with compression=5
+
 -- User Account
+sp_who
+
+sp_displaylogin
+
+sp_helpuser
+
+create login jwang with password jwang123 default database pubs2
+
+drop login jwang with override
+
+select suser_id("jwang")
+
 select suser_name(), suser_id(), db_name()
 
 select name, suid from syslogins
