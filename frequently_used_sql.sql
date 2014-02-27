@@ -59,9 +59,16 @@ load database shared_file_2 from "/net/nas/nas/engineering/sybase-ase/shared_fil
 load database shared_file_2 from "/net/nas/nas/engineering/sybase-ase/shared_file_2_full" with listonly=full
 
 use master
+go
 sp_dboption "loaddb", "allow incremental dumpe", true
+use loaddb
+go
+checkpoint
+go
 
-dump database loaddb cumulative to "/net/nas/nas/engineering/sybase-ase/loaddb_cumulative_20131231_10AM"
+dump database loaddb full to "/net/pharos/export/sybase-ase/backups/full/loaddb_full_20140226_4PM"
+
+dump database loaddb cumulative to "/net/pharos/export/sybase-ase/backups/full/loaddb_cumulative_20140226_4PM"
 
 dump database testdb2 to "/net/nas/nas/engineering/sybase-ase/testdb2_comp_full_20140110_11AM" with compression=5
 
@@ -81,6 +88,11 @@ select suser_id("jwang")
 select suser_name(), suser_id(), db_name()
 
 select name, suid from syslogins
+
+-- Table
+create table foo (id bigint, code init)
+
+insert into foo values (1, 1)
 
 -- Misc
 shutdown
