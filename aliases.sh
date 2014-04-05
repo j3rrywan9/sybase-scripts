@@ -1,0 +1,16 @@
+#!/bin/sh
+alias START_S1="startserver -f $STARTUP/RUN_VM_06_S1"
+alias START_S2="startserver -f $STARTUP/RUN_VM_06_S2"
+alias START_S1_BS="startserver -f $STARTUP/RUN_VM_06_S1_BS"
+alias START_S2_BS="startserver -f $STARTUP/RUN_VM_06_S2_BS"
+alias START_SYBASE="/opt/sybase/START_SYBASE"
+alias SHOW_SYBASE="/opt/sybase/dba_scripts/sybase_info.sh"
+alias STOP_SYBASE="/opt/sybase/STOP_SYBASE"
+alias START_SYBASE_ALL="/opt/sybase/START_SYBASE ALL"
+alias START_SYBASE_ALL="/opt/sybase/STOP_SYBASE ALL"
+alias STARTUP="/opt/bin/sybase/STARTUP"
+alias sql1=" isql -Usa -Psybase -SVM_06_S1"
+alias sql2=" isql -Usa -Psybase -SVM_06_S2"
+alias new_dumps="find /opt/sybase/dumps -mtime -2 -exec ls -l {} \; | sort"
+alias old_dumps="find /opt/sybase/dumps -mtime +2 -exec ls -l {} \; | sort"
+alias rm='/bin/rm -i'
