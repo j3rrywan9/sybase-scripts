@@ -1,3 +1,5 @@
+sp_lmconfig 'edition'
+
 select @@version
 
 select @@maxpagesize
@@ -70,7 +72,7 @@ dump database loaddb full to "/net/pharos/export/sybase-ase/backups/full/loaddb_
 
 dump database loaddb cumulative to "/net/pharos/export/sybase-ase/backups/full/loaddb_cumulative_20140226_4PM"
 
-dump database testdb2 to "/net/nas/nas/engineering/sybase-ase/testdb2_comp_full_20140110_11AM" with compression=5
+dump database testdb2 to "/net/pharos/export/sybase-ase/backups/testdb2_comp_full_20140110_11AM" with compression=5
 
 -- User Account
 sp_who
@@ -95,10 +97,15 @@ create table foo (id bigint, code init)
 insert into foo values (1, 1)
 
 -- Misc
+-- Stopping Adaptive Server
 shutdown
 
 shutdown with nowait
 
+-- Stopping Backup Server
+shutdown SYB_BACKUP
+
+-- Querying Backup Server
 SYB_BACKUP...sp_who
 
 select srvnetname from sysservers where srvname='SYB_BACKUP'
