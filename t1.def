@@ -1,0 +1,3 @@
+create table t1 ( c1 numeric(10,0) identity, c2 varchar(50) )
+
+/* ### DEFNCOPY: END OF DEFINITION */
