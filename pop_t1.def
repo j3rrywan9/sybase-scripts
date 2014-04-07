@@ -1,0 +1,26 @@
+create procedure pop_t1
+@rows int = 1000 
+as
+declare @hashval varchar(20)
+declare @count int
+declare @incr int
+declare @start int
+
+select @start = isnull(max(c1),0) from t1
+
+set @count = 0
+
+while @count < @rows
+        begin
+        select @hashval = hash(@count)
+        insert into t1 
+        (c2)
+        select "test "+
+        convert(varchar(11),@count)
+        +"  "+convert(varchar(50),getdate() )+"  "+convert(varchar(11), @hashval) 
+
+set @incr=@count+1
+set @count = @incr
+end
+
+/* ### DEFNCOPY: END OF DEFINITION */
