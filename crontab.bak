@@ -1,0 +1,88 @@
+##----------------------------------------------------------------------------
+##      Crontable for a Typical Sybase User account
+## -------------------------------------------------------------------------
+##      cheat sheet for times 
+##
+##        @yearly    :    Run once a year, ie.  "0 0 1 1 *".
+##        @annually  :    Run once a year, ie.  "0 0 1 1 *".
+##        @monthly   :    Run once a month, ie. "0 0 1 * *".
+##        @weekly    :    Run once a week, ie.  "0 0 * * 0".
+##        @daily     :    Run once a day, ie.   "0 0 * * *".
+##        @hourly    :    Run once an hour, ie. "0 * * * *".
+## --------------------------------------------------------------------------
+
+#---------------------------------------------------------
+# backup the crontab hourly
+#---------------------------------------------------------
+
+0 * * * * crontab -l > /opt/sybase/dba_scripts/crontab.bak
+
+# ----------------------------------------------------------
+#   SYBASE ASE SERVER VM_04_S1
+# ----------------------------------------------------------
+
+#       Daily Purge dump files older than N days.
+#       every 1 days 
+#
+
+0 1 * * *  /bin/find  /opt/sybase/dumps/* -mtime +1 -type f  -exec rm -f  {} \;
+#
+
+#       Clean up everything since 1 day ago (will remove only last 24 hrs)
+#0 1 * * *  /bin/find  /opt/sybase/dumps/* -mtime -1 -type f  -exec rm -f  {} \;
+#
+
+# ----------------------------------------------------------
+#       testdb1 full dumps  (with out -t flag)
+# ----------------------------------------------------------
+#
+
+#       Dump database testdb1 daily
+#0 0 * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/do_backup.pl -Usa -Psybase -SVM_04_S1 -Dtestdb1    /opt/sybase/dumps >> /tmp/do_backup.out
+
+#       Dump database testdb1 every 6th hour  
+#0 */6 * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/do_backup.pl -Usa -Psybase -SVM_04_S1 -Dtestdb1    /opt/sybase/dumps >> /tmp/do_backup.out
+
+#--->   Dump database testdb1 every hour  
+#0 * * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/do_backup.pl -Usa -Psybase -SVM_04_S1 -Dtestdb1    /opt/sybase/dumps >> /tmp/do_backup.out
+
+#       Dump database testdb1  every 15th minute
+*/15 * * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/do_backup.pl -Usa -Psybase -SVM_04_S1 -Dtestdb1    /opt/sybase/dumps >> /tmp/do_backup.out
+
+
+# ----------------------------------------------------------
+#       testdb1 incremental dumps (with -t flag)
+# ----------------------------------------------------------
+
+#       Dump tran testdb1 every hour
+#0 * * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/do_backup.pl -Usa -Psybase -SVM_04_S1 -Dtestdb1  -t  /opt/sybase/dumps >> /tmp/do_backup.out
+
+#       Dump tran testdb1 every 15 minutes
+#*/15 * * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/do_backup.pl -Usa -Psybase -SVM_04_S1 -Dtestdb1   -t  /opt/sybase/dumps >> /tmp/do_backup.out
+
+#--->   Dump tran testdb1 every 5 minutes
+#*/5 * * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/do_backup.pl -Usa -Psybase -SVM_04_S1 -Dtestdb1  -t  /opt/sybase/dumps >> /tmp/do_backup.out
+
+#       Dump tran testdb1 every one minute
+* * * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/do_backup.pl -Usa -Psybase -SVM_04_S1 -Dtestdb1  -t  /opt/sybase/dumps >> /tmp/do_backup.out
+
+# ----------------------------------------------------------
+#       Background Load (Ins Delete updates )
+# ----------------------------------------------------------
+# 
+
+#       insert 50 rows
+
+*/5 * * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/run_ins_t1_testdb1.sh    > /dev/null
+
+#       delete oldest 50 rows
+
+*/5 * * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/run_del_t1_testdb1.sh    > /dev/null
+
+
+# Update - note this should not be run more than once per hour - runs a minute delay 50 minute update loop
+
+0 */4 * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/run_load_testdb1.sh  > /dev/null   
+
+# -- once an hour (more or less continual light load one user).
+#0 * * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/run_load_testdb1.sh  > /dev/null   
