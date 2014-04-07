@@ -23,19 +23,15 @@
 
 #       Daily Purge dump files older than N days.
 #       every 1 days 
-#
 
 0 1 * * *  /bin/find  /opt/sybase/dumps/* -mtime +1 -type f  -exec rm -f  {} \;
-#
 
 #       Clean up everything since 1 day ago (will remove only last 24 hrs)
 #0 1 * * *  /bin/find  /opt/sybase/dumps/* -mtime -1 -type f  -exec rm -f  {} \;
-#
 
 # ----------------------------------------------------------
 #       testdb1 full dumps  (with out -t flag)
 # ----------------------------------------------------------
-#
 
 #       Dump database testdb1 daily
 #0 0 * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/do_backup.pl -Usa -Psybase -SVM_04_S1 -Dtestdb1    /opt/sybase/dumps >> /tmp/do_backup.out
@@ -48,7 +44,6 @@
 
 #       Dump database testdb1  every 15th minute
 */15 * * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/do_backup.pl -Usa -Psybase -SVM_04_S1 -Dtestdb1    /opt/sybase/dumps >> /tmp/do_backup.out
-
 
 # ----------------------------------------------------------
 #       testdb1 incremental dumps (with -t flag)
@@ -69,7 +64,6 @@
 # ----------------------------------------------------------
 #       Background Load (Ins Delete updates )
 # ----------------------------------------------------------
-# 
 
 #       insert 50 rows
 
@@ -78,7 +72,6 @@
 #       delete oldest 50 rows
 
 */5 * * * *  source /opt/sybase/15-7/SYBASE.sh ; /opt/sybase/dba_scripts/run_del_t1_testdb1.sh    > /dev/null
-
 
 # Update - note this should not be run more than once per hour - runs a minute delay 50 minute update loop
 
