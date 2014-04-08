@@ -10,8 +10,6 @@ sp_helpdb
 
 sp_helpdevice
 
-sp_configure "disable disk mirroring"
-
 select address_info as "host/port", host_name() as "hostname", @@servername as "servername", db_name() as "current_dbname" from master..syslisteners
 
 select address_info from master..syslisteners where net_type='tcp' and address_info not like 'localhost%' and address_info not like '127.0.0.1%'
@@ -27,6 +25,13 @@ select durability from sysdatabases where name='loaddb'
 use testdb
 go
 sp_spaceused syslogs
+go
+
+-- Configuration Parameters
+sp_configure "number of devices", 100
+go
+
+sp_configure "disable disk mirroring"
 go
 
 -- Production Database
