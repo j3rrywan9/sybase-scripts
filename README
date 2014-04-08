@@ -1,0 +1,7 @@
+Building Test Databases
+=======================
+1. Create necessary database devices using build_db_devs_S1.sql
+2. Create test databases using create_databases.sql
+3. Create a table t1 in each test database
+4. Create a stored procedure pop_t1 in each test database
+5. Step 3 and 4 can be done using defncopy_table_proc
