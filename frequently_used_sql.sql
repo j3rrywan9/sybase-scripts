@@ -1,4 +1,7 @@
+-- System Information
 sp_lmconfig 'edition'
+
+select @@sbssav
 
 select @@version
 
@@ -20,6 +23,7 @@ select name from sysdatabases where name not in ('master', 'model', 'sybsystemdb
 
 select sum(size) from sysusages where dbid=7
 
+-- Only applies to 15.5 and later
 select durability from sysdatabases where name='loaddb'
 
 use testdb
@@ -41,9 +45,9 @@ disk init name="sandbox_log", physname="/opt/sybase/devices/sandbox/log_dev1.dat
 
 create database sandbox on sandbox_data="5M" log on sandbox_log="5M"
 
-dump database sandbox to "/opt/sybase/dumps/sandbox_full.1" at ASE1570_S1_BS
+alter database master on master = "30M"
 
-dump tran sandbox to "/opt/sybase/dumps/sandbox_log.1" at ASE1570_S1_BS
+alter database sybsystemprocs on sysprocsdev = "10M"
 
 -- Staging Database
 disk init name="sandbox_staging_data", physname="/opt/sybase/devices/sandbox_staging/data_dev1.dat", size="10M", dsync=false, directio=true
