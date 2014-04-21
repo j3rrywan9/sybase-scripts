@@ -1,6 +1,10 @@
-defncopy -Usa -Psybase -SVM_06_S1  in t1.def testdb1 
-defncopy -Usa -Psybase -SVM_06_S1  in t1.def testdb2 
-defncopy -Usa -Psybase -SVM_06_S1  in t1.def loaddb
-defncopy -Usa -Psybase -SVM_06_S1  in pop_t1.def testdb1
-defncopy -Usa -Psybase -SVM_06_S1  in pop_t1.def testdb2
-defncopy -Usa -Psybase -SVM_06_S1  in pop_t1.def loaddb
+INSTANCE=$1
+DB1=$2
+DB2=$3
+DB3=$4
+defncopy -Usa -Psybase -S $INSTANCE in t1.def DB1
+defncopy -Usa -Psybase -S $INSTANCE in t1.def DB2
+defncopy -Usa -Psybase -S $INSTANCE in t1.def DB3
+defncopy -Usa -Psybase -S $INSTANCE in pop_t1.def DB1
+defncopy -Usa -Psybase -S $INSTANCE in pop_t1.def DB2
+defncopy -Usa -Psybase -S $INSTANCE in pop_t1.def DB3
