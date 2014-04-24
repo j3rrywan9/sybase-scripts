@@ -71,7 +71,7 @@ load database shared_file_2 from "/net/nas/nas/engineering/sybase-ase/shared_fil
 
 use master
 go
-sp_dboption "loaddb", "allow incremental dumpe", true
+sp_dboption "loaddb", "allow incremental dump", true
 use loaddb
 go
 checkpoint
@@ -105,6 +105,19 @@ create table foo (id bigint, code init)
 
 insert into foo values (1, 1)
 
+-- Character Set and Sort Order
+sp_helpsort
+
+select name,id from syscharsets
+
+sp_configure 'default character set id', 171
+
+sp_configure 'default sortorder id', 52
+
+charset
+
+langinstall
+
 -- Misc
 -- Stopping Adaptive Server
 shutdown
@@ -121,8 +134,9 @@ select srvnetname from sysservers where srvname='SYB_BACKUP'
 
 update sysservers set srvnetname='VM_02_S4_BS' where srvname='SYB_BACKUP'
 
-use master
 sp_dboption "sandbox", "allow nulls by default", true
+
+sp_dboption "lakers", "single", true
 
 select * from sysusages where dbid=db_id("sales_db1")
 
