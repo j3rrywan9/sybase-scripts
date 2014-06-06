@@ -138,6 +138,8 @@ sp_dboption "sandbox", "allow nulls by default", true
 
 sp_dboption "lakers", "single", true
 
+sp_dboption "lakers", "read only", true
+
 select * from sysusages where dbid=db_id("sales_db1")
 
 select * from sysobjects where type='U'
