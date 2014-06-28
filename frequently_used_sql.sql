@@ -1,4 +1,6 @@
 -- System Information
+select srvname,srvnetname from sysservers
+
 sp_lmconfig 'edition'
 
 select @@sbssav
@@ -117,6 +119,13 @@ sp_configure 'default sortorder id', 52
 charset
 
 langinstall
+
+-- License
+sp_lmconfig
+
+sp_lmconfig 'edition','EE'
+
+sp_lmconfig 'license type','DT'
 
 -- Misc
 -- Stopping Adaptive Server
