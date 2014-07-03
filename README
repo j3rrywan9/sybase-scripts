@@ -1,7 +1,19 @@
 Building Test Databases
 =======================
 1. Create necessary database devices using build_db_devs_S1.sql
+
+isql -Usa -Psybase -SRH62_ASE_S1 -ibuild_db_devs_1.sql
+
 2. Create test databases using create_databases.sql
+
+isql -Usa -Psybase -SRH62_ASE_S1 -icreate_databases.sql
+
 3. Create a table t1 in each test database
+
+defncopy -Usa -Psybase -SRH62_ASE_S1 in t1.def testdb
+
 4. Create a stored procedure pop_t1 in each test database
+
+defncopy -Usa -Psybase -SRH62_ASE_S1 in pop_t1.def testdb
+
 5. Step 3 and 4 can be done using defncopy_table_proc
