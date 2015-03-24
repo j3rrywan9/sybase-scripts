@@ -88,6 +88,10 @@ dump database testdb2 to "/net/pharos/export/sybase-ase/backups/testdb2_comp_ful
 -- User Account
 sp_who
 
+sp_addlogin jwang, jwang123
+
+sp_role "grant", sa_role, jwang
+
 sp_displaylogin
 
 sp_helpuser
@@ -95,6 +99,8 @@ sp_helpuser
 create login jwang with password jwang123 default database pubs2
 
 drop login jwang with override
+
+grant role sa_role to jwang
 
 select suser_id("jwang")
 
