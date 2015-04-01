@@ -48,4 +48,4 @@ Workaround the Restrictive Permission Settings on ASE's Backup Server Errorlog
 
 2. Put it in the same directory ($SYBASE/$SYBASE_ASE/install) as the RUN_SERVER file for the backup server
 
-3. Modify the RUN_SERVER file so it calls reset_bs_errorlog_perms.sh in the backgroup before calling backup server
+3. Modify the RUN_SERVER file so it calls reset_bs_errorlog_perms.sh in the background before calling backup server
