@@ -1,7 +1,7 @@
 use master
 go
 
-sp_configure "number of devices", 100
+sp_configure "number of devices", 500
 go
 
 disk init name = 'data_dev1',
