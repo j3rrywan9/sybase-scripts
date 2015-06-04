@@ -122,7 +122,7 @@ sp_configure 'default character set id', 171
 
 sp_configure 'default sortorder id', 52
 
-charset
+charset -Usa -Psybase -SRH65_ASE16_TGT_S1 binary.srt roman8
 
 langinstall
 
