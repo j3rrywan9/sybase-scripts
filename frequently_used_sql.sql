@@ -92,6 +92,10 @@ sp_addlogin jwang, jwang123
 
 sp_role "grant", sa_role, jwang
 
+use pubs2
+
+sp_changeowner jwang
+
 sp_displaylogin
 
 sp_helpuser
