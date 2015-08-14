@@ -67,6 +67,8 @@ disk init name='disk800m', physname='/home/sybase/disk800m', size='800M'
 
 create database v2ptgtdb on disk800m='800M' for load
 
+drop database v2ptgtdb
+
 -- Backup and Recovery
 dump database one_file_mix_log to "/home/sybase/jwang/ofm_1" stripe on "/home/sybase/jwang/ofm_2" stripe on "/home/sybase/jwang/ofm_3"
 
