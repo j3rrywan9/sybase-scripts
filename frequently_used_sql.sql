@@ -62,6 +62,11 @@ load database sandbox_staging from "/opt/sybase/dumps/sandbox_full.1" at ASE1570
 
 unmount database sandbox_staging to "/home/sybase/staging/manifest"
 
+-- V2P
+disk init name='disk800m', physname='/home/sybase/disk800m', size='800M'
+
+create database v2ptgtdb on disk800m='800M' for load
+
 -- Backup and Recovery
 dump database one_file_mix_log to "/home/sybase/jwang/ofm_1" stripe on "/home/sybase/jwang/ofm_2" stripe on "/home/sybase/jwang/ofm_3"
 
