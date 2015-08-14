@@ -67,6 +67,8 @@ disk init name='disk800m', physname='/home/sybase/disk800m', size='800M'
 
 create database v2ptgtdb on disk800m='800M' for load
 
+online database v2ptgtdb
+
 drop database v2ptgtdb
 
 -- Backup and Recovery
