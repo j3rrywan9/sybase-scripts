@@ -146,7 +146,6 @@ sp_lmconfig 'edition','EE'
 
 sp_lmconfig 'license type','DT'
 
--- Misc
 -- Stopping Adaptive Server
 shutdown
 
@@ -162,6 +161,15 @@ select srvnetname from sysservers where srvname='SYB_BACKUP'
 
 update sysservers set srvnetname='VM_02_S4_BS' where srvname='SYB_BACKUP'
 
+-- Remote Backup Server
+-- Make sure add entries for remote backup server to interfaces file first
+select srvname, srvnetname from sysservers
+
+sp_addserver RH65_ASE16_TGT_S1_BS, NULL, RH65_ASE16_TGT_S1_BS
+
+RH65_ASE16_TGT_S1_BS...sp_who
+
+-- Misc
 sp_dboption "sandbox", "allow nulls by default", true
 
 sp_dboption "lakers", "single", true
