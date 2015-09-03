@@ -1,5 +1,5 @@
-Building Test Databases
-=======================
+# Building Test Databases
+
 1. Create necessary database devices using build_db_devs_S1.sql
 
 isql -Usa -Psybase -SRH62_ASE_S1 -ibuild_db_devs_1.sql
@@ -18,8 +18,8 @@ defncopy -Usa -Psybase -SRH62_ASE_S1 in pop_t1.def testdb
 
 5. Step 3 and 4 can be done using defncopy_table_proc
 
-Creating Tables with Cross-database Constraint
-==============================================
+# Creating Tables with Cross-database Constraint
+
 1. Create two databases "pubs2" and "pubs3"
 
 cd $SYBASE/$SYBASE_ASE/scripts
@@ -42,10 +42,11 @@ isql -Usa -Psybase -SRH62_ASE_S3 -iddlgen_TbConcilSelecaoContratoObito.sql
 
 5. Try to delete the VDB "pubs2"
 
-Workaround the Restrictive Permission Settings on ASE's Backup Server Errorlog
-==============================================================================
+# Workaround the Restrictive Permission Settings on ASE's Backup Server Errorlog
+
 1. Create a script named "reset_bs_errorlog_perms.sh"
 
 2. Put it in the same directory ($SYBASE/$SYBASE_ASE/install) as the RUN_SERVER file for the backup server
 
 3. Modify the RUN_SERVER file so it calls reset_bs_errorlog_perms.sh in the background before calling backup server
+
