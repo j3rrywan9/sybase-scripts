@@ -19,7 +19,8 @@ defncopy -Usa -Psybase -SRH62_ASE_S1 in t1.def testdb
 ```
 defncopy -Usa -Psybase -SRH62_ASE_S1 in pop_t1.def testdb
 ```
-Above two steps can be done using **defncopy_table_proc**
+
+- Above two steps can be done using **defncopy_table_proc**
 
 # Creating Tables with Cross-database Constraint
 
@@ -44,6 +45,8 @@ isql -Usa -Psybase -SRH62_ASE_S3 -iddlgen_TbConcilSelecaoContratoObito.sql
 - Try to delete the VDB "pubs2"
 
 # Workaround the Restrictive Permission Settings on ASE's Backup Server Errorlog
+
+This only applies to SAP ASE 15.7 SP100 and above, please refer to http://scn.sap.com/community/ase-custom-applications/blog/2015/02/25/how-to-make-the-permission-settings-on-ases-errorlog-less-restrictive
 
 1. Create a script named **reset_bs_errorlog_perms.sh**
 
