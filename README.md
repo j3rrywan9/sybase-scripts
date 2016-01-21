@@ -22,6 +22,16 @@ defncopy -Usa -Psybase -SRH62_ASE_S1 in pop_t1.def testdb
 
 - Above two steps can be done using **defncopy_table_proc**
 
+# V2P
+
+- Create a shell database "v2ptgtdb"
+```
+disk init name='disk800m', physname='/home/sybase/disk800m', size='800M'
+create database v2ptgtdb on disk800m='800M' for load
+```
+
+- V2P using GUI
+
 # Creating Tables with Cross-database Constraint
 
 - Create two databases "pubs2" and "pubs3"
